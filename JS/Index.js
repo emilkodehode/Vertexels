@@ -2,8 +2,8 @@
 // first get nav el
 const navDropDownContent = document.getElementById("dropdown-content");
 // make object i need name the pages and titel and if i place it in the dropdown list or make it a stand alone
-const dropdowncontent = ["Bouncingballs","MyCalculator"]
-const cssLink = "link-el"
+const dropdowncontent = ["Bouncingballs","MyCalculator"];
+const cssLink = "link-el";
 
 // there done absolutely perfect JK this is trash.
 // i need to refactor and make this nicer. make it reference a txt file maybe something like write in with some key value pair
@@ -16,4 +16,4 @@ function navbardropdown(){
     navDropDownContent.innerHTML = updateddropdown;
 }
 navbardropdown();
-console.log(navDropDownContent.innerHTML)
+console.log(navDropDownContent.innerHTML);
