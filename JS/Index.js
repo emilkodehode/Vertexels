@@ -3,6 +3,7 @@
 const navDropDownContent = document.getElementById("dropdown-content");
 // make object i need name the pages and titel and if i place it in the dropdown list or make it a stand alone
 const dropdowncontent = ["Bouncingballs","MyCalculator"]
+const cssLink = "link-el"
 
 // there done absolutely perfect JK this is trash.
 // i need to refactor and make this nicer. make it reference a txt file maybe something like write in with some key value pair
@@ -10,7 +11,7 @@ const dropdowncontent = ["Bouncingballs","MyCalculator"]
 function navbardropdown(){
     let updateddropdown = "";
     for (let i = 0; i < dropdowncontent.length; i++){
-        updateddropdown += `<a class="link-el" href="${dropdowncontent[i]}.html">${dropdowncontent[i]}</a>`
+        updateddropdown += `<a class="${cssLink}" href="${dropdowncontent[i]}.html">${dropdowncontent[i]}</a>`
     }
     navDropDownContent.innerHTML = updateddropdown;
 }
