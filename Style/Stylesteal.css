@@ -1,0 +1,24 @@
+header{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+    border: 1px aquamarine solid;
+}
+.dropdown-menu{
+    border: 1px aquamarine solid;
+}
+.dropdown-label{
+    width: 50px;
+    padding: 10px;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    border: 1px aquamarine solid;
+}
+.dropdown-menu:hover .dropdown-content{display: block;}
