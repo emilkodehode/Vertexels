@@ -4,6 +4,7 @@ const canvas = document.getElementById("canvas-el");
 const ctx = canvas.getContext("2d");
 ctx.translate(canvas.width/2,canvas.height/2);
 
+
 canvasBtn.addEventListener("click", function(){
     // color for filling rectangle
     ctx.fillStyle = "#FF0000";
@@ -19,7 +20,7 @@ canvasBtn.addEventListener("click", function(){
     ctx.stroke();
 })
 
-function randomcolor(){
+function random_color(){
     const rndnum1 = Math.random() * 255;
     const rndnum2 = Math.random() * 255;
     const rndnum3 = Math.random() * 255;
@@ -34,7 +35,7 @@ let spawny = 0;
 class ball{
     // if i understand this is just data i feed it. like a car needs wheels engine roof color and such.
     constructor(){
-        this.color = randomcolor();
+        this.color = random_color();
         this.x = spawnx,
         this.y = spawny,
         this.size = 25,
@@ -43,7 +44,7 @@ class ball{
     }
     // this is a behavior i can call i can probably place this outside and feed it arguments or have it in here and call it directly i think.
     // i culd probably have functions outside and feed it var from this i think i can see a scenario that works.
-    moveball(){
+    ball_move(){
         this.x += this.spdx;
         this.y += this.spdy;
         if (this.x + this.size /2 > canvas.width/2){
@@ -60,7 +61,7 @@ class ball{
             this.spdy *= -1;
         }
     }
-    drawball(){
+    ball_render(){
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fillStyle = this.color;
@@ -69,16 +70,16 @@ class ball{
 }
 
 
-function create_ball_on_bounce(item){
+function ball_color_on_bounce(item){
     const {x,y,size} = item;
     if (x + size/2  > canvas.width/2 || x - size/2 < -canvas.width/2){
-        let newcolor = randomcolor();
+        let newcolor = random_color();
         //console.log("i hit edge" + " " + newcolor);
         //console.log(x + " " + canvas.width/2 +" "+ -canvas.width/2)
         item.color = newcolor;
     }
     if (y + size/2  > canvas.width/2 || y - size/2 < -canvas.width/2){
-        let newcolor = randomcolor();
+        let newcolor = random_color();
         //console.log("i hit edge" + " " + newcolor);
         //console.log(x + " " + canvas.width/2 +" "+ -canvas.width/2)
         item.color = newcolor;
@@ -86,7 +87,7 @@ function create_ball_on_bounce(item){
 }
 
 let moreballs = [];
-function ballsonballs(){
+function balls_on_balls(){
     for (let i = 0; i < ball.length; i++){
         balls.push(new ball());
     }
@@ -100,21 +101,37 @@ function initial_ball_count(){
     }
 }
 initial_ball_count();
-function handleballs(){
+function handle_balls(){
     for (let i =0 ; i < balls.length;i++){
-        balls[i].moveball();
-        create_ball_on_bounce(balls[i]);
-        balls[i].drawball();
+        balls[i].ball_move();
+        ball_color_on_bounce(balls[i]);
+        balls[i].ball_render();
     }
 }
 
+
+//const trailNum = +document.getElementById("trail-input").value;
+const get_trail_input = () => trailNum = document.getElementById("trail-input").value; 
+// 0-1 = 0-10  1/10 = 0.1
+const trailEl = document.getElementById("trail-input");
+function trail_lenght(){
+    const lenght = `rgba(0,0,0,${get_trail_input() / 10})`;
+    return lenght;
+}
+trailEl.addEventListener("change", function(){
+    trail_lenght();
+})
+
 function update(){
-    ctx.fillStyle = "rgba(0,0,0,0.2)";
+    ctx.fillStyle = trail_lenght();
     ctx.fillRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
-    handleballs();
+    handle_balls();
+    //console.log(balls[0].x)
     requestAnimationFrame(update);
 }
 let start = false
 canvasBtn.addEventListener("click", function(event){
     update();
 })
+
+//button switch statement maybe?!!?
