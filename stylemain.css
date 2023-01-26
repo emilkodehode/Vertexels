@@ -49,6 +49,7 @@ Nav bar styling
     display: none;
     position: absolute;
     transform: translateX(-25px);
+    /*transform translate does not work on github pages*/
     z-index: 1;
     margin-top: 10px;
     padding: 12px;
