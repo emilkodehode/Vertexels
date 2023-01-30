@@ -48,11 +48,13 @@ Nav bar styling
 #dropdown-content{
     display: none;
     position: absolute;
+    transform: translateX(-25px);
+    /*transform translate does not work on github pages*/
     z-index: 1;
     margin-top: 10px;
-    padding: 10px;
+    padding: 12px;
     border: var(--mintdarkest-color) 15px groove;
-    background-color: var(--mintdark-color);
+    background-color: var(--mint-color);
     border-top: none;
 }
 .dropdown-menu:hover #dropdown-content{display:block;}
