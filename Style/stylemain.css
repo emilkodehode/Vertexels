@@ -46,17 +46,26 @@ Nav bar styling
 .dropdown-menu{position: relative;}
 .dropdown-label{color: var(--mintdark-color);}
 #dropdown-content{
-    display: none;
-    position: absolute;
     transform: translateX(-25px);
-    z-index: 1;
     margin-top: 10px;
     padding: 12px;
+    border-top: none;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
     border: var(--mintdarkest-color) 15px groove;
     background-color: var(--mint-color);
     border-top: none;
+    opacity: 0;
+    transition: 750ms all;
+    display: flex;
+    flex-direction: column;
 }
-.dropdown-menu:hover #dropdown-content{display:block;}
+.dropdown-menu:hover #dropdown-content{
+    opacity: 1;
+    visibility: visible;
+    transition: 500ms opacity;
+}
 #dropdown-content a {display: block;}
 .nav-el{
     background-color: var(--mint-color);
