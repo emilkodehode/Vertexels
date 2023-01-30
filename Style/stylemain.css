@@ -48,11 +48,13 @@ Nav bar styling
 #dropdown-content{
     display: none;
     position: absolute;
+    transform: translateX(-25px);
+    /*transform translate does not work on github pages*/
     z-index: 1;
     margin-top: 10px;
-    padding: 10px;
+    padding: 12px;
     border: var(--mintdarkest-color) 15px groove;
-    background-color: var(--mintdark-color);
+    background-color: var(--mint-color);
     border-top: none;
 }
 .dropdown-menu:hover #dropdown-content{display:block;}
@@ -79,47 +81,6 @@ Nav bar styling
 }
 .dropdown-menu{border-bottom: none;}
 /* -    -   -   -   -
-horizontal scroll
--   -   -   -   - */
-#h-bar{
-    overflow-x: hidden;
-    overflow-x: scroll;
-    margin: auto;
-    border: 5px solid red;
-    width: 100px;
-    height: fit-content;
-    font-size: 20;
-    display: flex;
-    flex-direction: row;
-    transition: all 5s;
-}
-#h-bar:hover{
-    border: 50px solid red;
-}
-#h-bar p::first-letter{
-    font-size: 25;
-    color: red;
-}
-#h-bar p{
-    margin: 5px;
-}
-#h-bar p{
-    background-color: black;
-    color: white;
-    border: groove 5px white;
-}
-#h-bar p:nth-child(2n){
-    color: green;
-}
-#h-bar p:nth-child(3n+1){
-    color: pink;
-}
-#h-bar p:hover{
-    background-color: white;
-    color: black;
-    border: dotted 5px black;
-}
-/* -    -   -   -   -
 my css variables
 -   -   -   -   - */
 :root{
@@ -129,7 +90,6 @@ my css variables
     --mintlight-color: rgb(151,230,179);
     --mintlightest-color: rgb(182,243,204);
     --mintborder-border: groove 5px var(--mintdarkest-color);
-    --mintgradient-: linear-gradient(rgba(182,243,204, 0.9), rgba(97,165,117,0.9));
 }
 
 /* -    -   -   -   -
@@ -149,7 +109,7 @@ section{
     margin: 0 auto;
     width: 50%;
     padding: 10px;
-    background-image: var(--mintgradient-);
+    background-color: var(--mintdark-color);
     border: var(--mintborder-border);
 }
 .main-text{
@@ -220,19 +180,23 @@ Parallax dangerzone
     background-attachment: fixed;
     background-position-x: center;
 }
-.chocolatebox, .purplebox, .greenstairs{
+.chocolatebox{
+    background-image: url(../Images/ChocolateBox32.svg);
     min-height: 128px;
     width: auto;
     z-index: -1;
 }
-.chocolatebox{
-    background-image: url(../Images/ChocolateBox32.svg);
-}
 .greenstairs{
     background-image: url(../Images/GreenStairs32.svg);
+    min-height: 128px;
+    width: auto;
+    z-index: -1;
 }
 .purplebox{
     background-image: url(../Images/PurpleBox32.svg);
+    min-height: 128px;
+    width: auto;
+    z-index: -1;
 }
 /* -    -   -   -   -
 calculator page
