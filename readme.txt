@@ -1,0 +1,1 @@
+my school project to teach me and show my progress on learning html/css and javascript. looking forward to node and getting more backend 
