@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="JS/MyCalculator.js" async></script>
-    <script src="JS/index.js" async></script>
-    <link rel="stylesheet" href="Style/styleMain.css">
+    <script src="JS/mycalculator.js" async></script>
+    <script src="JS/index.js" defer></script>
+    <link rel="stylesheet" href="Style/stylemain.css">
     <title>Math Time</title>
 </head>
 <body>
@@ -36,7 +36,14 @@
                     <p>i need to redo my video either upload it on another site and link it or just re-render it smaller or replace with simple animation. for now have a claculator so fancy</p>
                 </div>
                 <div>
-                    <input type="number" name="num1-el" id="num1-el"> <input type="number" name="num2-el" id="num2-el">
+                    <input type="number" name="num1-el" id="num1-el">
+                    <select name="operator" id="operator">
+                        <option value="+">Add</option>
+                        <option value="-">Subtract</option>
+                        <option value="/">Divide</option>
+                        <option value="*">Multiply</option>
+                    </select>
+                    <input type="number" name="num2-el" id="num2-el">
                 </div>
                 <div id="calculator-btns">
                     <button id="add-el">Add</button> <button id="subtract-el">Subtract</button> <button id="multiply-el">Multiply</button> <button id="divide-el">Divide</button>
@@ -44,11 +51,20 @@
                 <p>SUM: <span id="sum-el"></span></p>
             </div>
         </section>
+        <section>
+            <p>Enter a positive whole number. This will run the Collatz function on all numbers from 1 to the number given. The output will be the starting number taking the most steps to reach 1. And the number within the range wich reached the highest value before 1.</p>
+            <input type="number" name="collatz-input" id="collatz-input">
+            <p id="collatz-text"></p>
+            <p>This show the journey of the one with most steps</p>
+            <canvas id="collatz-steps" width="500" height="500" style="border: 5px black solid; background-color: black;"></canvas>
+            <p>This show the journey of the one that reached the highest</p>
+            <canvas id="collatz-highest" width="500" height="500" style="border: 5px black solid; background-color: black;"></canvas>
+        </section>
     </main>
     <footer>
         <div class="footer-el">
             <p>
-                woowie im fancy down here in the footer. maybe ille have some information on the author and copyright or disclaimers and stuff.
+                when i tested to see of my Collatz function was correct i see that some people count the initial starting number as a step and i wholeheartadly disagree. the steps 4 uses i would say is 2. cause you have not done the Collatz function on the integer until after it is changed value so it counts steps only after the value has changed has the first step been taken.
             </p>
         </div>
     </footer>

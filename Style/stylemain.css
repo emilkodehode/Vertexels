@@ -22,10 +22,13 @@ body{
 header{
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 main{
     flex: 1;
     margin: auto;
+    position: relative;
+    z-index: 0;
 }
 footer{
     border-top: dotted 5px var(--mintdarkest-color);
@@ -37,26 +40,34 @@ Nav bar styling
 -   -   -   -   - */
 #nav-bar{
     padding-top: 20px;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin: 20px;
-    z-index: 1;
+    position: relative;
 }
 .dropdown-menu{position: relative;}
 .dropdown-label{color: var(--mintdark-color);}
 #dropdown-content{
-    display: none;
-    position: absolute;
-    z-index: 1;
+    transform: translateX(-25px);
     margin-top: 10px;
-    padding: 10px;
-    border: var(--mintdarkest-color) 15px groove;
-    background-color: var(--mintdark-color);
+    padding: 12px;
     border-top: none;
+    visibility: hidden;
+    position: absolute;
+    border: var(--mintdarkest-color) 15px groove;
+    background-color: var(--mint-color);
+    border-top: none;
+    opacity: 0;
+    transition: 750ms all;
+    display: flex;
+    flex-direction: column;
+    transform: translateZ(1);
 }
-.dropdown-menu:hover #dropdown-content{display:block;}
-#dropdown-content a {display: block;}
+.dropdown-menu:hover #dropdown-content{
+    opacity: 1;
+    visibility: visible;
+}
 .nav-el{
     background-color: var(--mint-color);
     padding: 10px;
@@ -79,6 +90,47 @@ Nav bar styling
 }
 .dropdown-menu{border-bottom: none;}
 /* -    -   -   -   -
+horizontal scroll
+-   -   -   -   - */
+#h-bar{
+    overflow-x: hidden;
+    overflow-x: scroll;
+    margin: auto;
+    border: 5px solid red;
+    width: 100px;
+    height: fit-content;
+    font-size: 20;
+    display: flex;
+    flex-direction: row;
+    transition: all 5s;
+}
+#h-bar:hover{
+    border: 50px solid red;
+}
+#h-bar p::first-letter{
+    font-size: 25;
+    color: red;
+}
+#h-bar p{
+    margin: 5px;
+}
+#h-bar p{
+    background-color: black;
+    color: white;
+    border: groove 5px white;
+}
+#h-bar p:nth-child(2n){
+    color: green;
+}
+#h-bar p:nth-child(3n+1){
+    color: pink;
+}
+#h-bar p:hover{
+    background-color: white;
+    color: black;
+    border: dotted 5px black;
+}
+/* -    -   -   -   -
 my css variables
 -   -   -   -   - */
 :root{
@@ -93,6 +145,9 @@ my css variables
 /* -    -   -   -   -
 my sitewide classes
 -   -   -   -   - */
+/* canvas{
+    position: relative;
+}*/
 .sticky-test{
     position: sticky;
     top: 0;
@@ -105,7 +160,7 @@ my sitewide classes
 }
 section{
     margin: 0 auto;
-    width: 50%;
+    width: fit-content;
     padding: 10px;
     background-color: var(--mintdark-color);
     border: var(--mintborder-border);
@@ -178,23 +233,18 @@ Parallax dangerzone
     background-attachment: fixed;
     background-position-x: center;
 }
-.chocolatebox{
-    background-image: url(../Images/ChocolateBox32.svg);
+.chocolatebox, .greenstairs, .purplebox{
     min-height: 128px;
     width: auto;
-    z-index: -1;
+}
+.chocolatebox{
+    background-image: url(../Images/ChocolateBox32.svg);
 }
 .greenstairs{
     background-image: url(../Images/GreenStairs32.svg);
-    min-height: 128px;
-    width: auto;
-    z-index: -1;
 }
 .purplebox{
     background-image: url(../Images/PurpleBox32.svg);
-    min-height: 128px;
-    width: auto;
-    z-index: -1;
 }
 /* -    -   -   -   -
 calculator page
@@ -203,8 +253,42 @@ calculator page
     margin: 10px;
 }
 /* -    -   -   -   -
-Canvas style and placement
+Canvas style and "placement"
 -   -   -   -   - */
 #canvas-section{
+    /* i for some reason wrote stuff inline cause reasons */
     width: fit-content;
+}
+/* -    -   -   -   -
+style for html form
+-   -   -   -   - */
+#agegate, #namegate{
+    visibility: hidden;
+    opacity: 0;
+    transition: all 2000ms;
+}
+#agecheck{
+    text-align: center;
+    width: 100px;
+}
+#username{
+    width: auto;
+    text-align: center;
+}
+label, select, input{
+    margin: 5px 0;
+}
+input{
+    text-align: center;
+}
+/* this removes the styling on the input fields.
+removes the gizmo thing on the right side */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
