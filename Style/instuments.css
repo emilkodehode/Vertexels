@@ -6,10 +6,25 @@
 }
 .instrument{
     cursor: pointer;
+    background-color: aquamarine;
     width: 5em;
     height: 5em;
-    border: 5px solid red;
+    border: 5px solid aquamarine;
     border-radius: 50%;
     padding: 10px;
-    width: fit-content;
+}
+.instrumentActive{
+    cursor: pointer;
+    background-color: rgb(42, 133, 103);
+    width: 5em;
+    height: 5em;
+    border: 5px solid rgb(139, 252, 186);
+    border-radius: 50%;
+    padding: 10px;
+}
+.instrument p{
+    font-size: 25px;
+}
+.instrument p::first-letter{
+    text-transform: capitalize;
 }
