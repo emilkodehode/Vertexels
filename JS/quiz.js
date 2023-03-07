@@ -6,19 +6,21 @@ when we are out of question a result should show
 
 question objects is a way to go.
 
-i wanna use
+goal of this assigment for me for the most part is to use return explicitly. i have had no issue completing a given task always a way. but i want to be better.
+
+so i have quiz now to get answers and get next question. remove current question keep value of submitted answer and get next question.
 */
 
 const quizForm = [
     {
-        question: "im asking",
-        options: ["option a", "option b", "option c", "option d"],
-        solutions: ["option a", "option d"],
+    question: "im asking",
+    options: ["option a", "option b", "option c", "option d"],
+    scores: [1,-1,-1,1],
     },
     {
     question: "im asking another",
     options: ["option 1", "option 2", "option 3", "option 4"],
-    solutions: ["option 2", "option 3"],
+    scores: [-1,1,1,-1],
     }
 ]
 
@@ -30,42 +32,65 @@ function quizInitializer(){
     quizBtn.textContent = "start quiz"
     quizBtn.addEventListener("click",(e)=>{
         currentTask++
-        quizTaskMaker(currentTask)
         quizButtonHandler(e.target, currentTask)
     })
     quizEl.append(quizBtn)
 }
 
 function quizButtonHandler(click,currentTask){
+    //this should handle getting next question and keeping users answers
+    //so im gonna write seperate function for getting and keeping answers clearing current question and drive towards next question until the end.
+    //3 unique states. start middle end. all driven by current task
+    let userScore = 0
+    let submittedValues = quizEl.querySelectorAll(`input:checked`)
+    for (const submit of submittedValues) {
+        userScore += +submit.value
+    }
+    console.log(userScore)
     if(currentTask === -1){
         click.textContent = "start quiz"
+        quizTaskHandler(currentTask)
     }
-    else if(currentTask === quizForm.length -1){
-        click.textContent = "submit and get score"
+    else if(currentTask < quizForm.length -1){
+        click.textContent = "submit answer"
+        quizTaskHandler(currentTask)
     }
     else{
-        click.textContent = "submit answer"
+        click.textContent = "submit and get score"
     }
-    while(quizEl.children.length + 1){
-        quizEl.remove(1)
+}
+
+
+function elementCreator(tag = "div", props = {}){
+    let element = document.createElement(tag)
+    for (const prop of Object.entries(props)) {
+        const [key,value] = prop
+        element[key] = value
     }
+    return element
 }
 
 quizInitializer()
 
-function quizTaskMaker(currentTask){
-    let {question,options} = quizForm[currentTask]
-    let textP = document.createElement("p")
-    options.forEach(option => {
-        let container = document.createElement("label")
-        container.textContent = option
-        let checkbox = document.createElement("input")
-        checkbox.type = "checkbox"
-        checkbox.value = option
-        checkbox.style.display = "inline-block"
-        container.append(checkbox)
-        quizEl.append(container)
-    });
+function quizTaskHandler(currentTask){
+    const {question,options,scores} = quizForm[currentTask]
+    const quizContainer = elementCreator("div", {className: "quizcontainer"})
+    const textP = elementCreator("p")
     textP.textContent = question
     quizEl.append(textP)
+    let i = 0
+    //i see map is better to just make a collection i started of with a for each but i want to focus on finding ways to use return explicitly
+    const container = options.map(option => {
+        let choice = elementCreator("label", {textContent: option})
+        let checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.value = scores[i]
+        i++
+        checkbox.style.display = "inline-block"
+        choice.append(checkbox)
+        return choice
+    });
+    //fuk yeah rememberd spread thingy after i got a bunch of htmlstuff in console
+    quizContainer.append(...container)
+    quizEl.append(quizContainer)
 }
