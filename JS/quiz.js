@@ -22,21 +22,50 @@ const quizForm = [
     }
 ]
 
-let currentTask = 0
-
 const quizEl = document.getElementById("quiz-el")
 
-function quizTaskMaker(){
-    let {question,options,solutions} = quizForm[currentTask]
+function quizInitializer(){
+    let currentTask = -1
+    const quizBtn = document.createElement("button")
+    quizBtn.textContent = "start quiz"
+    quizBtn.addEventListener("click",(e)=>{
+        currentTask++
+        quizTaskMaker(currentTask)
+        quizButtonHandler(e.target, currentTask)
+    })
+    quizEl.append(quizBtn)
+}
+
+function quizButtonHandler(click,currentTask){
+    if(currentTask === -1){
+        click.textContent = "start quiz"
+    }
+    else if(currentTask === quizForm.length -1){
+        click.textContent = "submit and get score"
+    }
+    else{
+        click.textContent = "submit answer"
+    }
+    while(quizEl.children.length + 1){
+        quizEl.remove(1)
+    }
+}
+
+quizInitializer()
+
+function quizTaskMaker(currentTask){
+    let {question,options} = quizForm[currentTask]
     let textP = document.createElement("p")
+    options.forEach(option => {
+        let container = document.createElement("label")
+        container.textContent = option
+        let checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.value = option
+        checkbox.style.display = "inline-block"
+        container.append(checkbox)
+        quizEl.append(container)
+    });
     textP.textContent = question
     quizEl.append(textP)
 }
-
-const quizBtn = document.createElement("button")
-
-function quizInitializer(){
-    currentTask = 0
-    quizTaskMaker()
-}
-quizInitializer()

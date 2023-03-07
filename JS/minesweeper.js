@@ -215,7 +215,9 @@ function handleUserClick(clickx,clicky){
 }
 
 //oh snap what the fuk is this and how the hell does it work and how did i manage to figure it out i think the variables is mirrored and evertyhing works on pure luck
-//i know mouseclick is correct and i check if my click is inside the box of a cell. so i go trough every cell and check if my is inside? but why is a cell start doubled and cell end just one
+/*i know mouseclick is correct and i check if my click is inside the box of a cell.
+so i go trough every cell and check if myclick is inside? but why is a cell start doubled and cell end just one*/
+
 function cellClicked(clickx,clicky, cell){
     let cellxstart = cell.x * cell.width + cell.width
     let cellxend = cell.x * cell.width
