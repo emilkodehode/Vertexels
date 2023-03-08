@@ -13,13 +13,18 @@ so i have quiz now to get answers and get next question. remove current question
 
 const quizForm = [
     {
-    question: "im asking",
+    question: "im asking first question",
     options: ["option a", "option b", "option c", "option d"],
     scores: [1,-1,-1,1],
     },
     {
-    question: "im asking another",
+    question: "im asking the second question",
     options: ["option 1", "option 2", "option 3", "option 4"],
+    scores: [-1,1,1,-1],
+    },
+    {
+    question: "this is the third question",
+    options: ["this choice", "that one", "maybe this", "chose me"],
     scores: [-1,1,1,-1],
     }
 ]
@@ -36,7 +41,8 @@ function quizInitializer(){
     })
     quizEl.append(quizBtn)
 }
-
+//     -1,        0,       1,        2,      3,      4
+//  start quiz, first q, second q, last q,
 function quizButtonHandler(click,currentTask){
     //this should handle getting next question and keeping users answers
     //so im gonna write seperate function for getting and keeping answers clearing current question and drive towards next question until the end.
@@ -47,16 +53,13 @@ function quizButtonHandler(click,currentTask){
         userScore += +submit.value
     }
     console.log(userScore)
-    if(currentTask === -1){
-        click.textContent = "start quiz"
-        quizTaskHandler(currentTask)
-    }
-    else if(currentTask < quizForm.length -1){
-        click.textContent = "submit answer"
+    if(currentTask === (quizForm.length - 1)){
+        click.textContent = "submit and get score"
         quizTaskHandler(currentTask)
     }
     else{
-        click.textContent = "submit and get score"
+        quizTaskHandler(currentTask)
+        click.textContent = "submit answer"
     }
 }
 
