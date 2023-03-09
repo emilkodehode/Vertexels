@@ -383,3 +383,30 @@ console.log(findEvenIndex([1,2,3,4,3,2,1]), "The array was: [1,2,3,4,3,2,1] inde
 console.log(findEvenIndex([1,100,50,-51,1,1]),1, "The array was: [1,100,50,-51,1,1] \n");
 console.log(findEvenIndex([1,2,3,4,5,6]),-1, "The array was: [1,2,3,4,5,6] \n");
 console.log(findEvenIndex([20,10,30,10,10,15,35]),3, "The array was: [20,10,30,10,10,15,35] \n");
+
+
+//promp sort trough friends list array and filter out everyone that has a name not of 4 character length.
+function friend(friends){
+  let realFriends = [];
+  for(let i = 0; i < friends.length; i++){
+    if (friends[i].length === 4){
+      realFriends.push(friends[i]);      
+    }
+  }
+  return realFriends;
+}
+
+//codewars two integers positive negative find all numbers between them add all of the tgheter return
+function getTotalNumBetween(a,b){
+  let max = Math.max(a,b)
+  console.log(max)
+  let min = Math.min(a,b)
+  console.log(min)
+  //woowie Sum of Integers Formula fancy why is it this inclusive 1
+  return (max - min + 1) * (max + min) / 2
+}
+
+console.log(getTotalNumBetween(0,1))    // 1
+console.log(getTotalNumBetween(-10,-5))   //-45
+console.log(getTotalNumBetween(5,-1))   //14
+
