@@ -384,7 +384,6 @@ console.log(findEvenIndex([1,100,50,-51,1,1]),1, "The array was: [1,100,50,-51,1
 console.log(findEvenIndex([1,2,3,4,5,6]),-1, "The array was: [1,2,3,4,5,6] \n");
 console.log(findEvenIndex([20,10,30,10,10,15,35]),3, "The array was: [20,10,30,10,10,15,35] \n");
 
-
 //promp sort trough friends list array and filter out everyone that has a name not of 4 character length.
 function friend(friends){
   let realFriends = [];
@@ -410,3 +409,37 @@ console.log(getTotalNumBetween(0,1))    // 1
 console.log(getTotalNumBetween(-10,-5))   //-45
 console.log(getTotalNumBetween(5,-1))   //14
 
+function spinWords(string){
+  array = string.split(" ")
+  let newString = []
+  for (let i = 0; i < array.length; i++) {
+    if(array[i].length >= 5){
+      newString.push([...array[i]].reverse().join(""))
+    }else{
+      newString.push(array[i])
+    }
+  }
+  return newString.join(" ")
+}
+
+console.log(spinWords( "Hey fellow warriors" )) //=> returns "Hey wollef sroirraw" 
+console.log(spinWords( "This is a test")) //=> returns "This is a test" 
+console.log(spinWords( "This is another test" )) //=> returns "This is rehtona test"
+
+function likes(names) {
+  if(names.length === 1){
+  return `${names[0]} likes this`
+  }
+  else if(names.length === 2){
+  return `${names[0]} and ${names[1]} likes this`
+  }
+  else if(names.length === 3){
+  return `${names[0]}, ${names[0]} and ${names[0]} likes this`
+  }
+  else if(names.length > 3){
+  return `${names[0]}, ${names[0]} and ${names.length} likes this`
+  }
+  else{
+  return `no one likes this`
+  }
+}
