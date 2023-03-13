@@ -443,3 +443,62 @@ function likes(names) {
   return `no one likes this`
   }
 }
+
+
+// complete the function
+function solution(string) {
+  let i = 0
+  let char = ""
+  while (i <= string.length){
+    char = string.charAt(i)
+    if(char === char.toUpperCase() && char !== char.toLowerCase()){
+      string = string.slice(0,i) + " " + string.slice(i)
+      i++
+    }
+    i++
+  }
+  return string
+}
+
+console.log(solution('camelCasing')) // 'camel Casing', 'Unexpected result')
+console.log(solution('camelCasingTest')) // 'camel Casing Test'
+
+function pigIt(string){
+  string = string.split(" ")
+  let sample = /[a-z]/g
+  latin = string.map(word => {
+    char = word.charAt(0)
+    if (sample.test(word)){
+    word += char + "ay"
+    word = word.slice(1,word.length)
+    return word
+    }
+  })
+  return latin.join(" ")
+}
+
+console.log(pigIt('Pig latin is cool')) //'igPay atinlay siay oolcay'
+console.log(pigIt('This is my string')) // 'hisTay siay ymay tringsay'
+console.log(pigIt('Pig latin, is cool!'))
+
+function digPow(n, p){
+  let startNum = n
+  let totalSum = 0
+  let k = 0
+  n = (n.toString().split(""))
+  for(let i = 0; i < n.length; i++){
+    totalSum += Math.pow(n[i], p)
+    p++
+  }
+  k = totalSum / startNum
+  if(k % 1 === 0){
+    return k
+  }
+  else {
+    return -1
+  }
+}
+
+console.log(digPow(89, 1))//, 1)
+console.log(digPow(92, 1))//, -1)
+console.log(digPow(46288, 3))//, 51)
