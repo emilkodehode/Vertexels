@@ -502,3 +502,28 @@ function digPow(n, p){
 console.log(digPow(89, 1))//, 1)
 console.log(digPow(92, 1))//, -1)
 console.log(digPow(46288, 3))//, 51)
+
+//return the total number of smiling faces in the array
+function countSmileys(arr) {
+  let smily = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes((":")||(";"))){
+      if(arr[i].includes(("-")||("~")) && arr.length > 1){
+        if(arr[i].includes("D")||(")")){
+          smily++
+          console.log(arr[i])
+        }
+      }
+      else if(arr[i].includes("D")||(")")){
+        smily++
+        console.log(arr[i])
+      }
+    }
+  }  
+  return smily
+}
+
+console.log(countSmileys([]                             ))//, 0);
+console.log(countSmileys([':D',':~)',';~D',':)']        ))//, 4);
+console.log(countSmileys([':)',':(',':D',':O',':;']     ))//, 2);
+console.log(countSmileys([';]', ':[', ';*', ':$', ';-D']))//, 1);
