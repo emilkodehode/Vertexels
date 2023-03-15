@@ -14,9 +14,22 @@ when we are out of question a result should show with a score
 question objects is a way to go.
 
 todo:
-so i have quiz now to get answers and get next question. remove current question keep value of submitted answer and get next question.
-make it so that mutliple choices are allowed and sometimes not i think given how labeling and checkbox work if i create name aswell
+done : so i have quiz now to get answers and get next question. remove current question keep value of submitted answer and get next question.
+done : make it so that mutliple choices are allowed and sometimes not i think given how labeling and checkbox work if i create name aswell
+
+reset quiz, when pressing the button on the result it should completely reset the quiz from the start
+
+make a proper intro explaining in brief this quiz and what to expect like sqares mean multiple choice circle 1 choice what the theme is and such
+
+scramble choices so they dont appear in the same order
+
+scramble questions themselves so they dont appear in the same order
+
+i need to make a proper score totalt, i think when i create the choices value i can just check for each positive integer above 0 add them all togheter
+for the potential max score set that and get it when the final result is shown
 */
+
+const quizEl = document.getElementById("quiz-el")
 
 const quizForm = [
     {
@@ -35,19 +48,18 @@ const quizForm = [
     {
     question: "this is the third question. multiple choice yes",
     options: ["this choice", "that one", "maybe this", "chose me"],
-    scores: [-1,1,1,-1],
+    scores: [-1,1,1,10],
     multipleChoice: true
     }
 ]
 
-const quizEl = document.getElementById("quiz-el")
-
-function quizInitializer(){
+function quizInitializer(quizForm){
     //this is probably a bad way to use this as a form of state
     let currentTask = 0
     const quizBtn = document.createElement("button")
     quizBtn.textContent = "start quiz"
     //my logic flow is flawed. i want to prevent user from going to next question without selecting a choice
+    //i made it happen but i feel it is very hacky way of doing it
     
     //additional check to stop rerender hacky way but works
     let sameQuestion = currentTask
@@ -59,7 +71,7 @@ function quizInitializer(){
         }
         //additional check to stop rerender hacky way but works
         if(sameQuestion !== currentTask){
-            quizEventHandler(e.target, currentTask)
+            quizEventHandler(e.target, currentTask, quizForm)
         }
         sameQuestion = currentTask
     })
@@ -67,12 +79,12 @@ function quizInitializer(){
 }
 //     -1,        0,       1,        2,      3,      4
 //  start quiz, first q, second q, last q,
-function quizEventHandler(click,currentTask){
+function quizEventHandler(click,currentTask, quizForm){
     /*
     this should handle getting next question and keeping users answers
     so im gonna write seperate function for getting and keeping answers
     clearing current question and drive towards next question until the end.
-    3 unique states. start middle end. all driven by current task
+    3 unique "states/conditions". start middle end. all driven by current task
     */
     let userScore = 0
     let submittedValues = quizEl.querySelectorAll(`input:checked`)
@@ -83,23 +95,25 @@ function quizEventHandler(click,currentTask){
     if(currentTask === (quizForm.length - 1)){
         reRenderQuiz(quizEl)
         click.textContent = "submit and get score"
-        quizTaskHandler(currentTask)
+        quizTaskHandler(currentTask, quizForm)
     }
     else if(currentTask === quizForm.length){
         reRenderQuiz(quizEl)
-        let result = showScore(userScore)
+        let result = showScore(userScore,)
+        click.textContent = "reset and retake quiz?"
         quizEl.append(result)
     }
     else{
         reRenderQuiz(quizEl)
-        quizTaskHandler(currentTask)
+        quizTaskHandler(currentTask, quizForm)
         click.textContent = "submit answer"
     }
 }
 
 function showScore(score){
     let scoreEl = elementCreator("p", {class: "scoreEl"})
-    scoreEl.textContent = `you finished this quiz with a score of ${score}`
+    scoreEl.textContent = `you finished this quiz with a score of ${score} out of ${maxPossibleScore(quizForm)}`
+
     return scoreEl
 }
 
@@ -108,7 +122,6 @@ function reRenderQuiz(element){
         element.removeChild(quizEl.lastChild)
     }
 }
-
 
 function elementCreator(tag = "div", props = {}){
     let element = document.createElement(tag)
@@ -119,18 +132,26 @@ function elementCreator(tag = "div", props = {}){
     return element
 }
 
-quizInitializer()
-
-
+function maxPossibleScore(quizForm){
+    let maxscore = 0
+    quizForm.forEach(element => {
+        for (let i = 0; i < element.scores.length; i++) {
+            if(element.scores[i] > 0){
+                maxscore += element.scores[i]
+            }
+        }
+    })
+    return maxscore
+}
 
 //creates the html elements containing the quiz questions and their given choices
-function quizTaskHandler(currentTask){
-    const {question,options,scores,multipleChoice} = quizForm[currentTask]
+//read up on idem potensy stateless
+function quizTaskHandler(currentTask, quizes){
+    const {question,options,scores,multipleChoice} = quizes[currentTask]
     const quizContainer = elementCreator("div", {className: "quizcontainer"})
-    const textP = elementCreator("p")
-    textP.textContent = question
+    const textP = elementCreator("p", {textContent: question})
     quizEl.append(textP)
-    
+
     const container = options.map(option => {
         let choice = elementCreator("label", {textContent: option})
         let inputEl = document.createElement("input")
@@ -140,7 +161,7 @@ function quizTaskHandler(currentTask){
         //quick way to select next value
         inputEl.value = scores[i]
         i++
-
+        
         if(!multipleChoice){
             let onechoice = question
             choice.name = onechoice
@@ -152,4 +173,7 @@ function quizTaskHandler(currentTask){
     //awww yisss rememberd spread thingy after i got a bunch of htmlstuff in console
     quizContainer.append(...container)
     quizEl.append(quizContainer)
+
 }
+
+quizInitializer(quizForm)
