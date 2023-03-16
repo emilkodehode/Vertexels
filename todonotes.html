@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do Notes</title>
+    <link rel="stylesheet" href="Style/stylemain.css">
+    <script src="JS/index.js" defer></script>
+    <script src="JS/todonotes.js" defer></script>
+</head>
+<body>
+    <header>
+        <div id="nav-bar">
+            <div class="nav-el">
+                <a class="link-el" href="mygoals.html">2023 GOALS</a>
+            </div>
+            <div class="nav-el dropdown-menu">
+                <span class="dropdown-label link-el">Small Projects</span>
+                <div class="dropdown-content">
+                </div>
+            </div>
+            <div class="nav-el">
+                <a class="link-el" href="index.html">Main Page</a>
+            </div>
+            <div class="nav-el">
+                <a class="link-el" href="aboutme.html">About Me</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section>
+            <p>lets make some notes</p>
+            <div id="note-user-input-container">
+                <textarea name="note-user-input" id="note-user-input" cols="30" rows="10"></textarea>
+                <button id="note-submit">Sumbmit Note</button>
+            </div>
+            <div id="notes-container"></div>
+        </section>
+    </main>
+</body>
+</html>

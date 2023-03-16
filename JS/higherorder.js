@@ -339,21 +339,22 @@ let my2Promise = new Promise(function(myResolve, myReject) {
 /*so yeah promises are kinda weird and hard. but the important thing is remember to resolve it.
 if i ever make something that others need to wait for i must handle reject incase of failure so i can inform other of what has happend*/
 const myPromise = new Promise((resolve, reject)=>{
-  const dice = Math.random()*10
-  if(dice <=5){
-    resolve("this is me being a success")};
-  reject("rejected have some 'information'");
+  setTimeout(() => {
+    const dice = Math.random()*10
+    if(dice <=5){
+      resolve("this is me being a success")};
+    reject("i have been rejected");
+  }, 1000);
 });
 
 
-async function error(){
+async function promise(){
   let value = await myPromise
-  .then(value => value)
   .catch(error => Error(error))
   console.log(value)
 }
 
-error()
+promise()
 
 function findEvenIndex(arr)
 {
@@ -505,18 +506,16 @@ console.log(digPow(46288, 3))//, 51)
 
 //return the total number of smiling faces in the array
 function countSmileys(arr) {
-  let smily = 0
+  let smily = []
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].includes((":")||(";"))){
-      if(arr[i].includes(("-")||("~")) && arr.length > 1){
-        if(arr[i].includes("D")||(")")){
-          smily++
-          console.log(arr[i])
+    if (arr[i].includes(":")||arr[i].includes(";")){
+      if(arr[i].includes("-")||arr[i].includes("~")){
+        if(arr[i].includes("D")||arr[i].includes(")")){
+          smily.push(arr[i])
         }
       }
-      else if(arr[i].includes("D")||(")")){
-        smily++
-        console.log(arr[i])
+      else if(arr[i].includes("D")||arr[i].includes(")") && arr.length === 1){
+        smily.push(arr[i])
       }
     }
   }  
@@ -527,3 +526,5 @@ console.log(countSmileys([]                             ))//, 0);
 console.log(countSmileys([':D',':~)',';~D',':)']        ))//, 4);
 console.log(countSmileys([':)',':(',':D',':O',':;']     ))//, 2);
 console.log(countSmileys([';]', ':[', ';*', ':$', ';-D']))//, 1);
+console.log(countSmileys([":>" , ":(" , ":~>" , ":o)" , ";~D" , ":>" , ";~)"]))//: expected 3 to equal 2
+console.log(countSmileys([":D" , ":~)" , ";~D" , ":)"]))//, 1);
