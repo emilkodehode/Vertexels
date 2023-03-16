@@ -16,13 +16,17 @@ reload notes
 
 //how much should be done in html and ho much should be done in js
 
-let notes = [{text: "i am unique example", id: 42},
-{text: "i am unique example", id: 42},
-{text: "i am a premade note example", id: 0},
-{text: "i have an existing id i should not be here", id: 0},
-{text: "i am unique example", id: 42},
-{text: "i am unique example", id: 42},
-{text: "i am unique example", id: 42}]
+//just me making some initial data to use
+
+// let notes = [{text: "i am a premade note example", id: 0},
+// {text: "i have an existing id i should not be here wash me", id: 0},
+// {text: "i am unique example", id: 42},]
+// function storingData(data){
+//     localStorage.setItem(`userNotes`, JSON.stringify(data))
+// }
+// storingData(notes)
+
+//localStorage.clear()
 
 const noteUserText = document.getElementById("note-user-input")
 const noteUserSubmitBtn = document.getElementById("note-submit")
@@ -33,9 +37,11 @@ getUserInput)
 
 function getUserInput(){
     let userText = noteUserText.value
-    notes.push({text: userText, id: Date.now()})
-    renderNotes(notes)
-    console.log(notes)
+    let newNote = ({text: userText, id: Date.now()})
+    let oldData = JSON.parse(localStorage.getItem("userNotes"))
+    oldData.push(newNote)
+    localStorage.setItem(`userNotes`, JSON.stringify(oldData))
+    renderNotes(oldData)
 }
 
 function noteAssembler(noteObj){
@@ -55,21 +61,31 @@ function noteAssembler(noteObj){
 }
 
 function removeNote(event){
-    console.log(event.target.textContent)
+    let oldData = JSON.parse(localStorage.getItem(`userNotes`))
+    let oldDataFiltered = oldData.filter(function (data){
+        console.log(data.id, +event.target.parentElement.id)
+        if(data.id !== +event.target.parentElement.id){
+            return data
+        }
+    })
+    localStorage.setItem(`userNotes`, JSON.stringify(oldDataFiltered))
     event.target.parentElement.remove()
 }
 
-function localStorage(data){
-    localStorage.setItem(`userNotes`, JSON.stringify(data))
-}
-
-localStorage(notes)
-
 //compare array 1 and 2 if new element render it to keep things from being unique no dupliacte entries here
-renderNotes(notes)
-function renderNotes(notes){
-    for (const noteObj of notes){
+function renderNotes(userNotes){
+    while(notesContainer.childElementCount > 0){
+        notesContainer.lastChild.remove()
+    }
+    for (const noteObj of userNotes){
         let noteEL = noteAssembler(noteObj)
         notesContainer.prepend(noteEL)
     }
+}
+
+loadStorageOnStartup()
+function loadStorageOnStartup(){
+    let data = JSON.parse(localStorage.getItem("userNotes"))
+    renderNotes(data)
+    localStorage.setItem(`userNotes`, JSON.stringify(data))
 }
