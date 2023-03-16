@@ -59,11 +59,15 @@ function removeNote(event){
     event.target.parentElement.remove()
 }
 
+function localStorage(data){
+    localStorage.setItem(`userNotes`, JSON.stringify(data))
+}
+
+localStorage(notes)
 
 //compare array 1 and 2 if new element render it to keep things from being unique no dupliacte entries here
 renderNotes(notes)
 function renderNotes(notes){
-
     for (const noteObj of notes){
         let noteEL = noteAssembler(noteObj)
         notesContainer.prepend(noteEL)
