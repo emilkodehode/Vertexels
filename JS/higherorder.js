@@ -508,13 +508,13 @@ console.log(digPow(46288, 3))//, 51)
 function countSmileys(arr) {
   let smily = []
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].includes(":")||arr[i].includes(";")){
-      if(arr[i].includes("-")||arr[i].includes("~")){
-        if(arr[i].includes("D")||arr[i].includes(")")){
+    if ((arr[i].charAt(0) === ":" || arr[i].charAt(0) === ";" )){
+      if((arr[i].charAt(1) === "-" || arr[i].charAt(1) === "~" )){
+        if((arr[i].charAt(2) === "D" || arr[i].charAt(2) === ")" )){
           smily.push(arr[i])
         }
       }
-      else if(arr[i].includes("D")||arr[i].includes(")") && arr.length === 1){
+      else if(( arr[i].charAt(1) === "D" || arr[i].charAt(1) === ")" )){
         smily.push(arr[i])
       }
     }
@@ -527,4 +527,4 @@ console.log(countSmileys([':D',':~)',';~D',':)']        ))//, 4);
 console.log(countSmileys([':)',':(',':D',':O',':;']     ))//, 2);
 console.log(countSmileys([';]', ':[', ';*', ':$', ';-D']))//, 1);
 console.log(countSmileys([":>" , ":(" , ":~>" , ":o)" , ";~D" , ":>" , ";~)"]))//: expected 3 to equal 2
-console.log(countSmileys([":D" , ":~)" , ";~D" , ":)"]))//, 1);
+console.log(countSmileys([":D" , ":~)" , ";~D" , ":)", "))"]))//, 4);

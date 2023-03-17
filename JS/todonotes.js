@@ -63,7 +63,8 @@ function noteAssembler(noteObj){
 function removeNote(event){
     let oldData = JSON.parse(localStorage.getItem(`userNotes`))
     let oldDataFiltered = oldData.filter(function (data){
-        console.log(data.id, +event.target.parentElement.id)
+        //parent id was a string so parse to num so comparison can work as expected.
+        //console.log(data.id, +event.target.parentElement.id)
         if(data.id !== +event.target.parentElement.id){
             return data
         }
@@ -85,7 +86,7 @@ function renderNotes(userNotes){
 
 loadStorageOnStartup()
 function loadStorageOnStartup(){
-    let data = JSON.parse(localStorage.getItem("userNotes"))
+    let data = JSON.parse(localStorage.getItem("userNotes")) || []
     renderNotes(data)
     localStorage.setItem(`userNotes`, JSON.stringify(data))
 }
