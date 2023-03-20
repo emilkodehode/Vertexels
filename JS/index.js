@@ -3,7 +3,7 @@
 // first get nav el
 const navDropDownEl = document.querySelector(".dropdown-content");
 // make object i need name the pages and titel and if i place it in the dropdown list or make it a stand alone
-const dropDownContent = ["todonotes","quiz","drumkit","gridmode","bouncingballs","fancylines","mycalculator","collision","oppgaver","animations","higherorder","games"];
+const dropDownContent = ["mypokedex","todonotes","quiz","drumkit","gridmode","bouncingballs","fancylines","mycalculator","collision","oppgaver","animations","higherorder","games"];
 const linkStyleClass = "link-el";
 
 // there done absolutely perfect JK this is trash.
