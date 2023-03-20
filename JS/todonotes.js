@@ -31,6 +31,12 @@ reload notes
 const noteUserText = document.getElementById("note-user-input")
 const noteUserSubmitBtn = document.getElementById("note-submit")
 const notesContainer = document.getElementById("notes-container")
+const deleteAll = document.getElementById("delete-everything")
+
+deleteAll.addEventListener("click",()=>{
+    localStorage.clear()
+    loadStorageOnStartup()
+})
 
 noteUserSubmitBtn.addEventListener("click",
 getUserInput)
@@ -48,6 +54,7 @@ function noteAssembler(noteObj){
     const {text, id} = noteObj
     const container =  document.createElement("div")
     container.id = id
+    container.className = "note"
 
     const note = document.createElement("p")
     note.textContent = text
