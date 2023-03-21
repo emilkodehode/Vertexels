@@ -22,3 +22,25 @@
     97%{transform: scale(1.05);}
     100%{transform: scale(1);}
 }
+.containerpokemon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerpokemon img{
+    background-color: black;
+}
+.hover-info{
+    position: absolute;
+    z-index: 3;
+    display: block;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    background-color: aquamarine;
+}
+.card:hover .hover-info{
+    visibility: visible;
+}
