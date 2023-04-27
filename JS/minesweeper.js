@@ -71,12 +71,10 @@ function tellNeighbours(cellClicked){
 
 function victoryChecker(){
     cellToClear--
-    console.log(cellToClear)
     if(cellToClear === 0){
         window.alert("you won")
     }
 }
-console.log(cellToClear)
 
 function cellRevealer(cellClicked){
     cellReveal(cellClicked)
